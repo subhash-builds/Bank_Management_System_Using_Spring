@@ -40,4 +40,22 @@ public class BankController {
 		return "AllUserList";
 	}
 
+	@RequestMapping("/deletethedetails")
+	public String deleteTheDetails(int userid) {
+		System.out.println(userid);// deleteById() method is used to deleted the data
+		bankUserService.deleteUserDetailsById(userid);
+		return "redirect:/rbi/bankuserlist";
+
+	}
+
+	@RequestMapping("updateuserdetails")
+	public String updateUserDetails(int userid, Model model) {
+
+		System.out.println(userid);
+		BankUserDetails bankUserDetails = bankUserService.updateUserDetails(userid);
+		model.addAttribute("bankUserDetails", bankUserDetails);
+		return "UpdateUserDetails";
+
+	}
+
 }

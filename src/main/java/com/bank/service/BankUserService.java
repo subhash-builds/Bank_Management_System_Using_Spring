@@ -3,14 +3,14 @@ package com.bank.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.bank.DAO.BankUserDAO;
 import com.bank.DTO.BankUserDTO;
 import com.bank.entity.BankUserDetails;
 import com.bank.exception.InvalidBankUserDetailsException;
 
-@Component
+@Service
 public class BankUserService {
 
 	@Autowired
@@ -52,6 +52,17 @@ public class BankUserService {
 	public List<BankUserDetails> fetchAllUserDetails() {
 
 		return bankUserDAO.getAllBankUserDetails();
+
+	}
+
+	public boolean deleteUserDetailsById(int userId) {
+		return bankUserDAO.deletedUserDetailsUsingId(userId);
+	}
+
+	public BankUserDetails updateUserDetails(int userid) {
+
+		BankUserDetails bankUserDetails = bankUserDAO.updateBankUserDetails(userid);
+		return bankUserDetails;
 
 	}
 

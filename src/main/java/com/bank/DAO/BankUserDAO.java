@@ -1,6 +1,7 @@
 package com.bank.DAO;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,17 @@ public class BankUserDAO {
 
 		return allUsers;
 
+	}
+
+	public boolean deletedUserDetailsUsingId(int userId) {
+
+		bankUserRepository.deleteById(userId);
+		return true;
+	}
+
+	public BankUserDetails updateBankUserDetails(int userId) {
+		Optional<BankUserDetails> bankUserDetails = bankUserRepository.findById(userId);
+		return bankUserDetails.get();
 	}
 
 }

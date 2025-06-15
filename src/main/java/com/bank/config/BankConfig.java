@@ -38,6 +38,7 @@ public class BankConfig {
 		JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
 		jpaTransactionManager.setEntityManagerFactory(emf);
 		return jpaTransactionManager;
+
 	}
 
 }
