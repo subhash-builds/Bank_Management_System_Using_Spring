@@ -58,13 +58,28 @@ public class BankController {
 
 	}
 
-	@RequestMapping("/updateduserdetails")
-	public void updatedUserDetails(BankUserDTO bankUserDTO) {
+	@RequestMapping("/updateduserdetailsrequest")
+	public String updatedUserDetails(BankUserDTO bankUserDTO) {
 
 		System.out.println("update started");
 		bankUserService.updateBankUserDetails(bankUserDTO);
 		System.out.println("user details are updated");
 
+		return "redirect:/rbi/bankuserlist";
+	}
+
+	@RequestMapping("/fileruserdetails")
+	public String filterUserDetailsByUsingName(String username, Model model) {
+
+		System.out.println("sorting by name started");
+		List<BankUserDetails> sortedListByName = (List<BankUserDetails>) bankUserService
+				.findUsingDetailsByName(username);
+		System.out.println(sortedListByName);
+
+		model.addAttribute("allUserList", sortedListByName);
+
+		System.out.println("Sort Completed");
+		return "AllUserList";
 	}
 
 }

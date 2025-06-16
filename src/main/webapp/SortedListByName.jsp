@@ -1,14 +1,13 @@
 <%@page import="com.bank.entity.BankUserDetails"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style type="text/css">
 body{
 width: 100vw;
@@ -24,10 +23,11 @@ border: 1px solid red;
 border-collapse: collapse;
 }
 </style>
+
 </head>
 <body>
 <h1>All User List</h1>
-<%List<BankUserDetails> allUser=(List<BankUserDetails>)request.getAttribute("allUserList"); %>
+<%List<BankUserDetails> allUser=(List<BankUserDetails>)request.getAttribute("sortedlistbyname"); %>
 <h2>Total User Count:<%=allUser.size() %></h2>
 <form action="fileruserdetails">
 <input type="text" placeholder="Search By Name" name="username">
@@ -69,5 +69,6 @@ border-collapse: collapse;
 </table>
 <!-- <%String mess=(String)request.getAttribute("deleteresp"); %>
 <span><%=mess %></span> -->
+
 </body>
 </html>

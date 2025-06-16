@@ -9,6 +9,7 @@ import com.bank.DAO.BankUserDAO;
 import com.bank.DTO.BankUserDTO;
 import com.bank.entity.BankUserDetails;
 import com.bank.exception.InvalidBankUserDetailsException;
+import com.bank.exception.UpdatedUserDetailsException;
 
 @Service
 public class BankUserService {
@@ -46,6 +47,7 @@ public class BankUserService {
 		bankUserDetails.setAddress(bankUserDTO.getAddress());
 		bankUserDetails.setGender(bankUserDTO.getGender());
 		bankUserDetails.setAmount(bankUserDTO.getAmount());
+		System.out.println("Details shifted from dto to entity");
 		bankUserDAO.insertBankUserDetails(bankUserDetails);
 
 	}
@@ -72,23 +74,25 @@ public class BankUserService {
 		if (bankUserDTO.getEmailid().contains("@gmail.com")) {
 
 		} else {
-			throw new InvalidBankUserDetailsException("Invalid Email Id");
+			throw new UpdatedUserDetailsException("Invalid Email Id");
 		}
 
 		if ((bankUserDTO.getAadhaarnumber() + "").matches("^[0-9]{12}")) {
 
 		} else {
-			throw new InvalidBankUserDetailsException("Invalid Aadhaar Number");
+			throw new UpdatedUserDetailsException("Invalid Aadhaar Number");
 		}
 
 		if ((bankUserDTO.getMobilenumber() + "").matches("^[6-9]{1}[0-9]{9}$")) {
 
 		} else {
-			throw new InvalidBankUserDetailsException("Invalid Mobile Number");
+			throw new UpdatedUserDetailsException("Invalid Mobile Number");
 
 		}
 
 		BankUserDetails bankUserDetails = new BankUserDetails();
+		// Auto-increment happening from every new entity class object.
+
 		bankUserDetails.setUserid(bankUserDTO.getId());
 		bankUserDetails.setName(bankUserDTO.getName());
 		bankUserDetails.setEmailid(bankUserDTO.getEmailid());
@@ -98,6 +102,17 @@ public class BankUserService {
 		bankUserDetails.setGender(bankUserDTO.getGender());
 		bankUserDetails.setAmount(bankUserDTO.getAmount());
 		bankUserDAO.insertBankUserDetails(bankUserDetails);
+
+	}
+
+	public List<BankUserDetails> findUsingDetailsByName(String username) {
+
+		List<BankUserDetails> sortedListByName = bankUserDAO.getUserDetailsByName(username);
+
+		if (sortedListByName.size() != 0) {
+			return sortedListByName;
+		}
+		return null;
 
 	}
 

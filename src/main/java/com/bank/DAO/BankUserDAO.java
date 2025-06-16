@@ -41,4 +41,10 @@ public class BankUserDAO {
 		return bankUserDetails.get();
 	}
 
+	public List<BankUserDetails> getUserDetailsByName(String name) {
+
+		return bankUserRepository.findByName(name);
+
+	}
+
 }

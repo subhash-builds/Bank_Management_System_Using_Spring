@@ -42,15 +42,20 @@ input::placeholder {
 color: maroon;
 	
 }
-
-
+span{
+position: absolute;
+bottom: 1.7vw;
+color: red;
+font-family: monospace;
+font-size: 1.7vw;
+}
 </style>
 </head>
 <body>
 <%BankUserDetails bankUserDetails=(BankUserDetails)request.getAttribute("bankUserDetails"); %>
-<form action="updateduserdetails">
+<form action="updateduserdetailsrequest">
 <h1>Update User details</h1>
-<input type="number" value=<%=bankUserDetails.getUserid()%> name="id" placeholder="UserName" readonly="readonly">
+<input type="number" value=<%=bankUserDetails.getUserid()%> name="id" placeholder="UserName" hidden="true">
 <input type="text" value=<%=bankUserDetails.getName()%> name="name" placeholder="UserName">
 <input type="text" value=<%=bankUserDetails.getEmailid()%>  name="emailid" placeholder="EmailId">
 <input type="text" value=<%=bankUserDetails.getAadhaarnumber()%> name="aadhaarnumber" placeholder="AadhaarNumber">
@@ -60,6 +65,8 @@ color: maroon;
 <input type="number" name="amount" placeholder="Amount" value=<%=bankUserDetails.getAmount() %>>
 <input type="submit" value="UPDATE">
 </form>
+<% String msg=(String)request.getAttribute("messexce"); %><!-- Get the object from HttpservletRequest   -->
+<span><%=msg %></span>
 <!-- private Integer id;
 	private String name;
 	private String emailid;

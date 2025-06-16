@@ -42,4 +42,15 @@ public class BankExceptionHandler {
 		return "AdminLogin";
 	}
 
+	@ExceptionHandler(UpdatedUserDetailsException.class)
+	public String updatedUserDetailsExceptionHandling(UpdatedUserDetailsException uude, Model model) {
+
+		System.out.println("Bank updated user details exception handler");
+
+		model.addAttribute("messexce", uude.getExcMessage());
+
+		return "UpdateUserDetails";
+
+	}
+
 }
