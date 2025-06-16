@@ -19,16 +19,16 @@ public class BankController {
 
 	@RequestMapping("/registrationpage")
 	public String registrationPage() {
-
+		System.out.println("user registration page is opened.");
 		return "BankUserRegistrationPage";
 
 	}
 
 	@RequestMapping("/bankaccountregistrationrequest")
 	public void registrationRequest(BankUserDTO bankUserDetails) {
-
 		System.out.println(bankUserDetails);
-		bankUserService.validateBankUsedDetails(bankUserDetails);
+		System.out.println("User details are inserted");
+		bankUserService.validateBankUserDetailsAndInsert(bankUserDetails);
 
 	}
 
@@ -55,6 +55,15 @@ public class BankController {
 		BankUserDetails bankUserDetails = bankUserService.updateUserDetails(userid);
 		model.addAttribute("bankUserDetails", bankUserDetails);
 		return "UpdateUserDetails";
+
+	}
+
+	@RequestMapping("/updateduserdetails")
+	public void updatedUserDetails(BankUserDTO bankUserDTO) {
+
+		System.out.println("update started");
+		bankUserService.updateBankUserDetails(bankUserDTO);
+		System.out.println("user details are updated");
 
 	}
 

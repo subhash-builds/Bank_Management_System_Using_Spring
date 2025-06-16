@@ -14,8 +14,8 @@ body{
 width:100vw;
 height:100vh;
 display: flex;
-justify-content: center;
-align-items: center;
+justify-content:center;
+align-items:center;
 background-color: #FFE4E1;
 }
 form {
@@ -25,15 +25,31 @@ flex-direction: column;
 	align-items: center;
 	background-color: #F0FFF0;
 }
+input{
+padding-left: .3vw;
+}
 input,button {
 	margin: 1vw;
+	font-size:1.5vw;
+	border-radius:.5vw;
 	border: none;
 	outline: none;
 	background-color: lightgreen;
 }
 input::placeholder{
 	color: brown;
-	text-align: center;
+	
+}
+button{
+width: 6vw;
+}
+span {
+
+    position:absolute;
+	color: red;
+	align-items: center;
+	bottom: 18vw;
+	font-size: 1.5vw;
 }
 </style>
 </head>

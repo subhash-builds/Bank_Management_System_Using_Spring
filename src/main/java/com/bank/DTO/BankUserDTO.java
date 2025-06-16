@@ -15,6 +15,7 @@ public class BankUserDTO {
 //	<input type="number" name="amount" placeholder="Amount">
 //
 
+	private Integer id;
 	private String name;
 	private String emailid;
 	private Long aadhaarnumber;
@@ -28,9 +29,10 @@ public class BankUserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BankUserDTO(String name, String emailid, Long aadhaarnumber, Long mobilenumber, String gender,
+	public BankUserDTO(int id, String name, String emailid, Long aadhaarnumber, Long mobilenumber, String gender,
 			String address, Double amount) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.emailid = emailid;
 		this.aadhaarnumber = aadhaarnumber;
@@ -38,6 +40,14 @@ public class BankUserDTO {
 		this.gender = gender;
 		this.address = address;
 		this.amount = amount;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -98,7 +108,7 @@ public class BankUserDTO {
 
 	@Override
 	public String toString() {
-		return "BankUserDetails [name=" + name + ", emailid=" + emailid + ", aadhaarnumber=" + aadhaarnumber
+		return "BankUserDTO [id=" + id + ", name=" + name + ", emailid=" + emailid + ", aadhaarnumber=" + aadhaarnumber
 				+ ", mobilenumber=" + mobilenumber + ", gender=" + gender + ", address=" + address + ", amount="
 				+ amount + "]";
 	}

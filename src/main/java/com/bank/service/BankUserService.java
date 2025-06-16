@@ -16,7 +16,7 @@ public class BankUserService {
 	@Autowired
 	BankUserDAO bankUserDAO;
 
-	public void validateBankUsedDetails(BankUserDTO bankUserDTO) {
+	public void validateBankUserDetailsAndInsert(BankUserDTO bankUserDTO) {
 
 		if (bankUserDTO.getEmailid().contains("@gmail.com")) {
 
@@ -38,6 +38,7 @@ public class BankUserService {
 		}
 
 		BankUserDetails bankUserDetails = new BankUserDetails();
+
 		bankUserDetails.setName(bankUserDTO.getName());
 		bankUserDetails.setEmailid(bankUserDTO.getEmailid());
 		bankUserDetails.setAadhaarnumber(bankUserDTO.getAadhaarnumber());
@@ -63,6 +64,40 @@ public class BankUserService {
 
 		BankUserDetails bankUserDetails = bankUserDAO.updateBankUserDetails(userid);
 		return bankUserDetails;
+
+	}
+
+	public void updateBankUserDetails(BankUserDTO bankUserDTO) {
+
+		if (bankUserDTO.getEmailid().contains("@gmail.com")) {
+
+		} else {
+			throw new InvalidBankUserDetailsException("Invalid Email Id");
+		}
+
+		if ((bankUserDTO.getAadhaarnumber() + "").matches("^[0-9]{12}")) {
+
+		} else {
+			throw new InvalidBankUserDetailsException("Invalid Aadhaar Number");
+		}
+
+		if ((bankUserDTO.getMobilenumber() + "").matches("^[6-9]{1}[0-9]{9}$")) {
+
+		} else {
+			throw new InvalidBankUserDetailsException("Invalid Mobile Number");
+
+		}
+
+		BankUserDetails bankUserDetails = new BankUserDetails();
+		bankUserDetails.setUserid(bankUserDTO.getId());
+		bankUserDetails.setName(bankUserDTO.getName());
+		bankUserDetails.setEmailid(bankUserDTO.getEmailid());
+		bankUserDetails.setAadhaarnumber(bankUserDTO.getAadhaarnumber());
+		bankUserDetails.setMobilenumber(bankUserDTO.getMobilenumber());
+		bankUserDetails.setAddress(bankUserDTO.getAddress());
+		bankUserDetails.setGender(bankUserDTO.getGender());
+		bankUserDetails.setAmount(bankUserDTO.getAmount());
+		bankUserDAO.insertBankUserDetails(bankUserDetails);
 
 	}
 
