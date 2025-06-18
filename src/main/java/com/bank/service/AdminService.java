@@ -28,7 +28,10 @@ public class AdminService {
 		adminDetails.setName(adminDTO.getAdminname());
 		adminDetails.setPassword(adminDTO.getAdminpassword());
 		adminDetails.setRole(adminDTO.getAdminrole());
+		adminDetails.setContactno(adminDTO.getContactno());
 
+		adminDetails.setBranch(adminDTO.getBranch());
+		adminDetails.setEmailid(adminDTO.getEmailid());
 		System.out.println("Before" + adminDetails);
 		AdminDetails adminDetails2 = adminDAO.insertAdminDetails(adminDetails);
 		System.out.println("After" + adminDetails2);

@@ -53,4 +53,13 @@ public class BankExceptionHandler {
 
 	}
 
+	@ExceptionHandler(UserLoginException.class)
+	public String userLoginException(UserLoginException ule, Model model) {
+
+		System.out.println("User Login Exception");
+		model.addAttribute("userloginexception", ule.getMessage());
+		return "UserLogin";
+
+	}
+
 }

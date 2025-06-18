@@ -36,7 +36,7 @@ public class BankUserDAO {
 		return true;
 	}
 
-	public BankUserDetails updateBankUserDetails(int userId) {
+	public BankUserDetails getBankUserDetailsById(int userId) {
 		Optional<BankUserDetails> bankUserDetails = bankUserRepository.findById(userId);
 		return bankUserDetails.get();
 	}
@@ -44,6 +44,29 @@ public class BankUserDAO {
 	public List<BankUserDetails> getUserDetailsByName(String name) {
 
 		return bankUserRepository.findByName(name);
+
+	}
+
+	public BankUserDetails getUserDetailsByMobileNumber(long mobilenumber) {
+
+		return bankUserRepository.findByMobilenumber(mobilenumber);
+
+	}
+
+	public List<BankUserDetails> getPendingUserDetailsByUsingStatus() {
+
+		return bankUserRepository.findByUserstatus("Pending");
+	}
+
+	public boolean addBankUserDetailsAfterAccepting(BankUserDetails bankUserDetails) {
+
+		bankUserRepository.save(bankUserDetails);
+		return true;
+	}
+
+	public Optional<BankUserDetails> getUserDetailsByPinNumber(int pinnum) {
+
+		return bankUserRepository.findByPinnum(pinnum);
 
 	}
 

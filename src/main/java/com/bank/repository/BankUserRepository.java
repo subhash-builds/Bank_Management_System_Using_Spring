@@ -1,6 +1,7 @@
 package com.bank.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -19,5 +20,13 @@ public interface BankUserRepository extends JpaRepository<BankUserDetails, Integ
 	// internally using equal().IgnoreCasting
 	List<BankUserDetails> findByName(String name);// chances of getting property not found exception in case of camel
 													// casing in entity class for variables.
+
+	List<BankUserDetails> findByNameOrEmailid(String name, String emailid);
+
+	BankUserDetails findByMobilenumber(long mn);
+
+	List<BankUserDetails> findByUserstatus(String userstatus);
+
+	Optional<BankUserDetails> findByPinnum(int pinnum);
 
 }

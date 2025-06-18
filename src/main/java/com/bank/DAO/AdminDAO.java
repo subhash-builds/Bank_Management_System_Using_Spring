@@ -26,6 +26,7 @@ public class AdminDAO {
 	public boolean getAdminDetailsBasedOnAdminId(int id) {
 
 		Optional<AdminDetails> ad = adminRepository.findById(id);
+		ad.map(AdminDetails::getName).orElse("Anonymous");
 		return ad.isPresent();
 
 	}

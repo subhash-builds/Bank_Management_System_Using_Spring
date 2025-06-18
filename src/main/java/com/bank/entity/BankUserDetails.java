@@ -11,6 +11,12 @@ import javax.persistence.Table;
 @Table(name = "bank_userdetails")
 public class BankUserDetails {
 
+	/*
+	 * private Integer id; private String name; private String emailid; private Long
+	 * aadhaarnumber; private Long mobilenumber; private String gender; private
+	 * String address; private Double amount;
+	 */
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userid;
@@ -30,6 +36,7 @@ public class BankUserDetails {
 	private Double amount;
 	private long accountnumber;
 	private int pinnum;
+	private String userstatus;
 
 	public BankUserDetails() {
 		super();
@@ -37,7 +44,7 @@ public class BankUserDetails {
 	}
 
 	public BankUserDetails(int userid, String name, String emailid, Long aadhaarnumber, Long mobilenumber,
-			String gender, String address, Double amount, long accountnumber, int pinnum) {
+			String gender, String address, Double amount, long accountnumber, int pinnum, String userstatus) {
 		super();
 		this.userid = userid;
 		this.name = name;
@@ -49,6 +56,7 @@ public class BankUserDetails {
 		this.amount = amount;
 		this.accountnumber = accountnumber;
 		this.pinnum = pinnum;
+		this.userstatus = userstatus;
 	}
 
 	public int getUserid() {
@@ -131,11 +139,20 @@ public class BankUserDetails {
 		this.pinnum = pinnum;
 	}
 
+	public String getUserstatus() {
+		return userstatus;
+	}
+
+	public void setUserstatus(String userstatus) {
+		this.userstatus = userstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "BankUserDetails [userid=" + userid + ", name=" + name + ", emailid=" + emailid + ", aadhaarnumber="
 				+ aadhaarnumber + ", mobilenumber=" + mobilenumber + ", gender=" + gender + ", address=" + address
-				+ ", amount=" + amount + ", accountnumber=" + accountnumber + ", pinnum=" + pinnum + "]";
+				+ ", amount=" + amount + ", accountnumber=" + accountnumber + ", pinnum=" + pinnum + ", userstatus="
+				+ userstatus + "]";
 	}
 
 }

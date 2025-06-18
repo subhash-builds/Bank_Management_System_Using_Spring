@@ -1,13 +1,12 @@
 <%@page import="com.bank.entity.BankUserDetails"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>All User List</title>
+<title>Pending User List</title>
 <style>
 * {
     padding: 0;
@@ -19,25 +18,25 @@
 body {
     width: 100vw;
     min-height: 100vh;
-    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+    background: linear-gradient(to right, #d3cce3, #e9e4f0);
     padding: 2vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #fff;
+    color: #333;
     animation: fadeIn 1s ease-in;
 }
 
 h1 {
+    font-size: 2.4vw;
+    color: #4b0082;
     margin-bottom: 1vw;
-    font-size: 2.5vw;
-    color: #f1f1f1;
 }
 
 h2 {
-    margin-bottom: 1vw;
     font-size: 1.5vw;
-    color: #e1e1e1;
+    margin-bottom: 1.5vw;
+    color: #6a1b9a;
 }
 
 form {
@@ -51,14 +50,14 @@ input[type="text"] {
     padding: 0.6vw 1vw;
     font-size: 1vw;
     border-radius: 0.5vw;
-    border: none;
-    width: 20vw;
+    border: 1px solid #a67ecb;
+    width: 22vw;
 }
 
 input[type="submit"], button {
     padding: 0.5vw 1.2vw;
     font-size: 1vw;
-    background-color: #27ae60;
+    background-color: #7e57c2;
     color: white;
     border: none;
     border-radius: 0.4vw;
@@ -67,38 +66,38 @@ input[type="submit"], button {
 }
 
 input[type="submit"]:hover, button:hover {
-    background-color: #1e8449;
+    background-color: #512da8;
     transform: scale(1.05);
 }
 
 table {
-    width: 90%;
+    width: 92%;
     border-collapse: collapse;
     background-color: white;
     color: #333;
     border-radius: 0.8vw;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
 th, td {
     padding: 1vw;
     text-align: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
-    background-color: #2c3e50;
+    background-color: #6a1b9a;
     color: white;
     font-size: 1.1vw;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f3e5f5;
 }
 
 tr:hover {
-    background-color: #e6f7ff;
+    background-color: #ede7f6;
     transition: background-color 0.3s ease;
 }
 
@@ -106,19 +105,17 @@ tr:hover {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-#deletebutton{
-background-color: red}
 </style>
 </head>
 <body>
 
-<h1>All User List</h1>
+<h1>Pending User List</h1>
 
-<% List<BankUserDetails> allUser = (List<BankUserDetails>) request.getAttribute("allUserList"); %>
+<% List<BankUserDetails> allUser = (List<BankUserDetails>) request.getAttribute("regpendinguserlist"); %>
 
 <h2>Total User Count: <%= allUser.size() %></h2>
 
-<form action="fileruserdetails">
+<form action="filerpendinguserdetails">
     <input type="text" placeholder="Search By Name" name="username">
     <input type="submit" value="Search">
 </form>
@@ -126,7 +123,7 @@ background-color: red}
 <table>
 <tr>
     <th>User Name</th>
-    <th>User Emailid</th>
+    <th>User Email ID</th>
     <th>User Phone Number</th>
     <th>User Aadhaar Number</th>
     <th>User Address</th>
@@ -145,15 +142,15 @@ background-color: red}
     <td><%= bankUserDetails.getGender() %></td>
     <td><%= bankUserDetails.getUserstatus() %></td>
     <td>
-        <form action="updateuserdetails">
+        <form action="acceptuserdetails">
             <input value="<%= bankUserDetails.getUserid() %>" hidden="true" name="userid">
-            <button type="submit">Update</button>
+            <button type="submit">Accept</button>
         </form>
     </td>
     <td>
-        <form action="deletetheuserdetails">
+        <form action="deletethedetails">
             <input value="<%= bankUserDetails.getUserid() %>" hidden="true" name="userid">
-            <button type="submit" id="deletebutton">Delete</button>
+            <button type="submit">Reject</button>
         </form>
     </td>
 </tr>

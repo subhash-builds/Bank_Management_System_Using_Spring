@@ -1,3 +1,4 @@
+
 package com.bank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +30,26 @@ public class AdminController {
 
 	}
 
-	@RequestMapping("loginpage")
+	@RequestMapping("/adminloginpage")
 	public String loginpage() {
 		System.out.println("admin login");
 		return "AdminLogin";
 	}
 
-	@RequestMapping("loginreq")
+	@RequestMapping("/adminloginreq")
 	public String adminloginreq(int adminid) {
 
 		adminService.checkingAdminId(adminid);
-		return "redirect:/rbi/bankuserlist";// This shift request from one controller to another.
+		return "redirect:/rbi/adminoperation";// This shift request from one controller to another.
 		// It is handled not by InternalResourceViewResolver, but by Spring’s built-in
 		// ViewResolver mechanism that detects
 		// special view prefixes — specifically, RedirectView.
 
+	}
+
+	@RequestMapping("/adminoperation")
+	public String adminOperations() {
+		return "AdminOperation";
 	}
 
 }

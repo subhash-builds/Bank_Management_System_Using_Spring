@@ -14,32 +14,43 @@ public class AdminDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "admin_id")
-	private int id;
+	private int adminid;
 	@Column(name = "admin_name", nullable = false)
 	private String name;
 	@Column(name = "admin_password", nullable = false)
 	private String password;
 	@Column(name = "admin_role", nullable = false)
 	private String role;
-
-	public AdminDetails(String name, String password, String role) {
-		super();
-		this.name = name;
-		this.password = password;
-		this.role = role;
-	}
+	@Column(name = "admin_contact", nullable = false)
+	private long contactno;
+	@Column(name = "admin_emailid")
+	private String emailid;
+	@Column(name = "admin_branch")
+	private String branch;
 
 	public AdminDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-		return id;
+	public AdminDetails(int adminid, String name, String password, String role, long contactno, String emailid,
+			String branch) {
+		super();
+		this.adminid = adminid;
+		this.name = name;
+		this.password = password;
+		this.role = role;
+		this.contactno = contactno;
+		this.emailid = emailid;
+		this.branch = branch;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getAdminid() {
+		return adminid;
+	}
+
+	public void setAdminid(int adminid) {
+		this.adminid = adminid;
 	}
 
 	public String getName() {
@@ -66,9 +77,34 @@ public class AdminDetails {
 		this.role = role;
 	}
 
+	public long getContactno() {
+		return contactno;
+	}
+
+	public void setContactno(long contactno) {
+		this.contactno = contactno;
+	}
+
+	public String getEmailid() {
+		return emailid;
+	}
+
+	public void setEmailid(String emailid) {
+		this.emailid = emailid;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
 	@Override
 	public String toString() {
-		return "AdminDetails [id=" + id + ", name=" + name + ", password=" + password + ", role=" + role + "]";
+		return "AdminDetails [adminid=" + adminid + ", name=" + name + ", password=" + password + ", role=" + role
+				+ ", contactno=" + contactno + ", emailid=" + emailid + ", branch=" + branch + "]";
 	}
 
 }
