@@ -131,6 +131,7 @@ background-color: red}
     <th>User Aadhaar Number</th>
     <th>User Address</th>
     <th>User Gender</th>
+    <th>Balance</th>
     <th>User Status</th>
     <th colspan="2">Operation</th>
 </tr>
@@ -143,6 +144,7 @@ background-color: red}
     <td><%= bankUserDetails.getAadhaarnumber() %></td>
     <td><%= bankUserDetails.getAddress() %></td>
     <td><%= bankUserDetails.getGender() %></td>
+    <td><%= bankUserDetails.getAmount() %></td>
     <td><%= bankUserDetails.getUserstatus() %></td>
     <td>
         <form action="updateuserdetails">

@@ -3,6 +3,7 @@ package com.bank.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -153,23 +154,49 @@ public class BankUserService {
 		bankUserDetails.setAccountnumber(accountnumber);
 		bankUserDetails.setPinnum(pinnum);
 		bankUserDetails.setUserstatus("Accepted");
-		bankUserDAO.addBankUserDetailsAfterAccepting(bankUserDetails);
+		bankUserDAO.updateBankUserDetails(bankUserDetails);
 		return bankUserDAO.getBankUserDetailsById(id);
 
 	}
 
-	public BankUserDetails findUserDetailsByPinNumberAndEmailid(int pinnum, String emailid) {
+	public BankUserDetails findUserDetailsByPinNumberAndEmailid(long accountNo, long mobileNo, int pinnum) {
 
-		Optional<BankUserDetails> optionalBud = bankUserDAO.getUserDetailsByPinNumber(pinnum);
+		Optional<BankUserDetails> optionalBud = bankUserDAO.getUserDetailsByPinNumber(accountNo, mobileNo);
 
-		BankUserDetails bud = optionalBud.orElseThrow(() -> new UserLoginException("Invalid Pin or Not Registered"));
-		Optional<String> optionalEmailid = optionalBud.map(BankUserDetails::getEmailid);
+		BankUserDetails bud = optionalBud.orElseThrow(
+				() -> new UserLoginException("Invalid AccountNumber/Invalid Mobile Number/Not Registered"));
+		Optional<Integer> optionalEmailid = optionalBud.map(BankUserDetails::getPinnum);
 
-		if (optionalEmailid.get().equals(emailid)) {
+		if (optionalEmailid.get() == pinnum) {
 			return bud;
 		} else {
-			throw new UserLoginException("Invalid Emailid");
+			throw new UserLoginException("Invalid Pin");
 		}
+
+	}
+
+	public void userAccountClosingRequest(int userid) {
+
+		BankUserDetails user = bankUserDAO.getBankUserDetailsById(userid);
+
+		user.setUserstatus("Closed");
+		bankUserDAO.updateBankUserDetails(user);
+	}
+
+	public List<BankUserDetails> getClosingUserList() {
+		List<BankUserDetails> closingUserList = bankUserDAO.getAllBankUserDetails().stream()
+				.filter(user -> user.getUserstatus().equals("Closed")).collect(Collectors.toList());
+		return closingUserList;
+	}
+
+	public boolean rejectClosingRequest(int userid) {
+
+		BankUserDetails user = bankUserDAO.getBankUserDetailsById(userid);
+
+		user.setUserstatus("Accepted");
+
+		bankUserDAO.updateBankUserDetails(user);
+		return true;
 
 	}
 

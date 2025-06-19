@@ -3,6 +3,7 @@
 	<persistence-unit name="Bank_Management_System_Using_Spring" transaction-type="RESOURCE_LOCAL">
 		<class>com.bank.entity.AdminDetails</class>
 		<class>com.bank.entity.BankUserDetails</class>
+		<class>com.bank.entity.TransactionDetails</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/m14_spring"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

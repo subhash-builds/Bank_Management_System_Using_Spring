@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Pending User List</title>
+<title>ClosingUserList</title>
 <style>
 * {
     padding: 0;
@@ -110,10 +110,9 @@ background-color: red}
 </style>
 </head>
 <body>
+  <h1>Closing User List</h1>
 
-<h1>Pending User List</h1>
-
-<% List<BankUserDetails> allUser = (List<BankUserDetails>) request.getAttribute("regpendinguserlist"); %>
+<% List<BankUserDetails> allUser = (List<BankUserDetails>) request.getAttribute("closinguserlist"); %>
 
 <h2>Total User Count: <%= allUser.size() %></h2>
 
@@ -148,18 +147,17 @@ background-color: red}
     <td>
         <form action="acceptuserdetails">
             <input value="<%= bankUserDetails.getUserid() %>" hidden="true" name="userid">
-            <button type="submit">Accept</button>
+            <button type="submit" id="accept">Accept</button>
         </form>
     </td>
     <td>
-        <form action="deletetheuserdetails">
+        <form action="rejectclosingrequest">
             <input value="<%= bankUserDetails.getUserid() %>" hidden="true" name="userid">
             <button type="submit" id="reject">Reject</button>
         </form>
     </td>
 </tr>
 <% } %>
-</table>
-
+  
 </body>
 </html>

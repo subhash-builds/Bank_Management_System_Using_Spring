@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bank.DTO.BankUserDTO;
@@ -45,7 +46,7 @@ public class BankUserController {
 
 	@RequestMapping("/deletetheuserdetails")
 	public String deleteTheDetails(int userid) {
-		System.out.println(userid);// deleteById() method is used to deleted the data
+		System.out.println("deleting " + userid);// deleteById() method is used to deleted the data
 		bankUserService.deleteUserDetailsById(userid);
 		return "redirect:/rbi/bankuserlist";
 
@@ -140,10 +141,40 @@ public class BankUserController {
 	}
 
 	@RequestMapping("/userloginreq")
-	public String userMainPage(int pinnum, String emailid, Model model) {
-		BankUserDetails bankUserDetails = bankUserService.findUserDetailsByPinNumberAndEmailid(pinnum, emailid);
+//	@RequestParam("pinnum")
+	public String userMainPage(@RequestParam("number") long number, int pinnum, Model model) {
+		BankUserDetails bankUserDetails = bankUserService.findUserDetailsByPinNumberAndEmailid(number, number, pinnum);
 		model.addAttribute("loginedbankuserdetails", bankUserDetails);
 		return "UserMainPage";
+	}
+
+	@ResponseBody
+	@RequestMapping("/closeaccount")
+	public String closeAccount(int userid) {
+
+		System.out.println(userid);
+		bankUserService.userAccountClosingRequest(userid);
+		return "Requested For Account Closing";
+
+	}
+
+	@RequestMapping("/getclosinguserdetails")
+	public String fetchClosingUsedDetails(Model model) {
+
+		List<BankUserDetails> regPendingUserList = bankUserService.getClosingUserList();
+		model.addAttribute("closinguserlist", regPendingUserList);
+		return "ClosingUserList";
+
+	}
+
+	@RequestMapping("/rejectclosingrequest")
+	public String rejectClosingRequest(int userid) {
+
+		System.out.println("rejecting closing request");
+		bankUserService.rejectClosingRequest(userid);
+		System.out.println("rejected successfully");
+
+		return "redirect:/rbi/getclosinguserdetails";
 	}
 
 }

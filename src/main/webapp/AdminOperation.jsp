@@ -70,7 +70,7 @@
     <form action="getpendinguserdetails">
       <input type="submit" value="Get Pending User Details">
     </form>
-    <form action="">
+    <form action="getclosinguserdetails">
       <input type="submit" value="Get Closing User Details">
     </form>
   </div>

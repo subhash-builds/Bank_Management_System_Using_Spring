@@ -85,6 +85,7 @@ span {
     font-size: 1.2vw;
     margin-top: 1vw;
     background-color: white;
+    border-radius: .2vw;
     
 }
 
@@ -110,9 +111,10 @@ span {
 <body>
     <form action="userloginreq">
         <h2>User Login</h2>
-        <input type="text" placeholder="Enter pin number" name="pinnum" required="required">
         
-        <input type="text" placeholder="Enter Email Id" name="emailid"  required="required">
+        
+        <input type="text" placeholder="Enter Account/Mobile No" name="number"  required="required">
+        <input type="text" placeholder="Enter pin number" name="pinnum" required="required">
         <button type="submit">Submit</button>
     </form>
     <%String msg=(String)request.getAttribute("userloginexception"); %>

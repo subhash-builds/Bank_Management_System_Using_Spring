@@ -29,4 +29,6 @@ public interface BankUserRepository extends JpaRepository<BankUserDetails, Integ
 
 	Optional<BankUserDetails> findByPinnum(int pinnum);
 
+	Optional<BankUserDetails> findByAccountnumberOrMobilenumber(long accountnumber, long mobilenumber);
+
 }

@@ -58,15 +58,15 @@ public class BankUserDAO {
 		return bankUserRepository.findByUserstatus("Pending");
 	}
 
-	public boolean addBankUserDetailsAfterAccepting(BankUserDetails bankUserDetails) {
+	public boolean updateBankUserDetails(BankUserDetails bankUserDetails) {
 
 		bankUserRepository.save(bankUserDetails);
 		return true;
 	}
 
-	public Optional<BankUserDetails> getUserDetailsByPinNumber(int pinnum) {
+	public Optional<BankUserDetails> getUserDetailsByPinNumber(long accountNo, long mobileNo) {
 
-		return bankUserRepository.findByPinnum(pinnum);
+		return bankUserRepository.findByAccountnumberOrMobilenumber(accountNo, mobileNo);
 
 	}
 
