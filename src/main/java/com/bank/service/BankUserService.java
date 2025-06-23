@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.bank.DAO.BankUserDAO;
 import com.bank.DTO.BankUserDTO;
 import com.bank.entity.BankUserDetails;
+import com.bank.exception.InSufficientBalanceException;
 import com.bank.exception.InvalidBankUserDetailsException;
 import com.bank.exception.UpdatedUserDetailsException;
 import com.bank.exception.UserLoginException;
@@ -20,6 +21,9 @@ public class BankUserService {
 
 	@Autowired
 	BankUserDAO bankUserDAO;
+
+	@Autowired
+	TransactionService transactionService;
 
 	public void validateBankUserDetailsAndInsert(BankUserDTO bankUserDTO) {
 
@@ -197,6 +201,32 @@ public class BankUserService {
 
 		bankUserDAO.updateBankUserDetails(user);
 		return true;
+
+	}
+
+	public void depositAmount(int userid, int amount, String mode, String remarks, String transactiontype) {
+		BankUserDetails bankUserDetails = bankUserDAO.getBankUserDetailsById(userid);
+
+		double totalAmount = bankUserDetails.getAmount() + amount;
+		bankUserDetails.setAmount(totalAmount);
+		bankUserDAO.updateBankUserDetails(bankUserDetails);
+
+		transactionService.insertTransactionDetails(bankUserDetails, amount, mode, remarks, transactiontype);
+
+	}
+
+	public void withdrawAmount(int userid, double amount, String mode, String remarks, String transactiontype) {
+		BankUserDetails bankUserDetails = bankUserDAO.getBankUserDetailsById(userid);
+
+		if (amount <= bankUserDetails.getAmount()) {
+			double totalAmount = (bankUserDetails.getAmount() - amount);
+			bankUserDetails.setAmount(totalAmount);
+			bankUserDAO.updateBankUserDetails(bankUserDetails);
+
+			transactionService.insertTransactionDetails(bankUserDetails, amount, mode, remarks, transactiontype);
+		} else {
+			throw new InSufficientBalanceException("InSufficient balance");
+		}
 
 	}
 

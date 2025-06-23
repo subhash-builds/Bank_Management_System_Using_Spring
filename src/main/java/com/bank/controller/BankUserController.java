@@ -86,7 +86,7 @@ public class BankUserController {
 		return "AllUserList";
 	}
 
-//	@RequestMapping("/fileruserdetails")
+	// @RequestMapping("/fileruserdetails")
 	public String filterUserDetailsByMobileNumber(long mobilenumber, Model model) {
 
 		System.out.println("sorting by mobile number started");
@@ -122,7 +122,7 @@ public class BankUserController {
 		return "PendingUserList";
 	}
 
-//	@ResponseBody, it is first then redirect.
+	// @ResponseBody, it is first then redirect.
 	@RequestMapping("/acceptuserdetails")
 	public String acceptRegistrationRequestOperation(int userid, Model model) {
 		System.out.println("accept process started");
@@ -141,7 +141,7 @@ public class BankUserController {
 	}
 
 	@RequestMapping("/userloginreq")
-//	@RequestParam("pinnum")
+	// @RequestParam("pinnum")
 	public String userMainPage(@RequestParam("number") long number, int pinnum, Model model) {
 		BankUserDetails bankUserDetails = bankUserService.findUserDetailsByPinNumberAndEmailid(number, number, pinnum);
 		model.addAttribute("loginedbankuserdetails", bankUserDetails);
@@ -175,6 +175,46 @@ public class BankUserController {
 		System.out.println("rejected successfully");
 
 		return "redirect:/rbi/getclosinguserdetails";
+	}
+
+	@RequestMapping("/depositRequest")
+	public String depositRequest(int userid, Model model) {
+
+		BankUserDetails bankUserDetails = bankUserService.getUserDetailsById(userid);
+
+		model.addAttribute("depositinguser", bankUserDetails);
+
+		return "UserDeposit";
+
+	}
+
+	@RequestMapping("/userdepositservlet")
+	public void depositAmount(@RequestParam("userid") int userid, @RequestParam("amount") int amount,
+			@RequestParam("mode") String mode, @RequestParam("remarks") String remarks,
+			@RequestParam("transactiontype") String transactiontype) {
+		System.out.println("deposit started");
+		bankUserService.depositAmount(userid, amount, mode, remarks, transactiontype);
+
+	}
+
+	@RequestMapping("/withdrawRequest")
+	public String withdrawRequest(int userid, Model model) {
+
+		BankUserDetails bankUserDetails = bankUserService.getUserDetailsById(userid);
+
+		model.addAttribute("depositinguser", bankUserDetails);
+
+		return "UserWithdrawal";
+
+	}
+
+	@RequestMapping("/withdrawservlet")
+	public void withdrawAmountFromAccount(@RequestParam("userid") int userid, @RequestParam("amount") int amount,
+			@RequestParam("mode") String mode, @RequestParam("remarks") String remarks,
+			@RequestParam("transactiontype") String transactiontype) {
+		System.out.println("withdraw started");
+		bankUserService.withdrawAmount(userid, amount, mode, remarks, transactiontype);
+
 	}
 
 }

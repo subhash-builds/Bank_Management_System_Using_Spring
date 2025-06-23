@@ -192,41 +192,48 @@
 
 <!-- Operations -->
 <div class="actions">
+
     <div class="card deposit">
-        <h4><i class="fas fa-arrow-down"></i> Deposit Funds</h4>
+        <h4><i class="fas fa-arrow-down"></i>Deposit Funds</h4>
         <form action="depositRequest">
         
-            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden>
-        <input type="submit" value="Add Money"></form>
+            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden="true">
+        	<input type="submit" value="Add Money">
+        </form>
     </div>
+    
     <div class="card withdraw">
         <h4><i class="fas fa-arrow-up"></i> Withdraw Funds</h4>
         <form action="withdrawRequest">
         
-            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden>
+            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden="true">
         <input type="submit" value="Withdraw"></form>
     </div>
+    
     <div class="card statement">
         <h4><i class="fas fa-file-alt"></i> Account Statement</h4>
         <form action="getStatement">
         
-            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden>
+            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden="true">
         <input type="submit" value="View Statement"></form>
     </div>
+    
     <div class="card security">
         <h4><i class="fas fa-shield-alt"></i> Security Settings</h4>
         <form action="changePassword">
         
-            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden>
+            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden="true">
         <input type="submit" value="Change Password"></form>
     </div>
+    
     <div class="card close-account">
         <h4><i class="fas fa-user-slash"></i> Close Account</h4>
         <form action="closeaccount">
-            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden>
+            <input type="text" value="<%= user.getUserid() %>" name="userid" hidden="true">
             <input type="submit" value="Request Closure">
         </form>
     </div>
+    
     <div class="card logout">
         <h4><i class="fas fa-sign-out-alt"></i> Logout</h4>
         <form action="logoutUser"><input type="submit" value="Exit Session"></form>
