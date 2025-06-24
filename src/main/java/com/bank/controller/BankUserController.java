@@ -2,6 +2,9 @@ package com.bank.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -197,15 +200,15 @@ public class BankUserController {
 
 	}
 
+//	
 	@RequestMapping("/withdrawRequest")
-	public String withdrawRequest(int userid, Model model) {
-
+	public String withdrawRequest(int userid, HttpServletRequest request) {
 		BankUserDetails bankUserDetails = bankUserService.getUserDetailsById(userid);
 
-		model.addAttribute("depositinguser", bankUserDetails);
-
+		System.out.println(bankUserDetails);
+		HttpSession session = request.getSession();
+		session.setAttribute("withdrawinguser", bankUserDetails);
 		return "UserWithdrawal";
-
 	}
 
 	@RequestMapping("/withdrawservlet")

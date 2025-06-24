@@ -62,4 +62,11 @@ public class BankExceptionHandler {
 
 	}
 
+	@ExceptionHandler(InSufficientBalanceException.class)
+	public String withdrawException(InSufficientBalanceException isbe, Model model) {
+		System.out.println("Insufficient balance exception");
+		model.addAttribute("balanceExcep", isbe.getExcMessage());
+		return "UserWithdrawal";
+	}
+
 }

@@ -58,7 +58,7 @@
 <%String msg=(String) request.getAttribute("balanceExcep"); %>
 <%=(msg!=null)? msg:"" %>
 <%
-    BankUserDetails bankUserDetails = (BankUserDetails) request.getAttribute("depositinguser");
+    BankUserDetails bankUserDetails = (BankUserDetails) request.getSession().getAttribute("withdrawinguser");
 %>
 
 <form action="withdrawservlet" method="post">
